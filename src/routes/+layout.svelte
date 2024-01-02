@@ -1,8 +1,9 @@
-<script lang="ts">
+<script>
+	import '../app.css';
 </script>
 
 <div class="container">
-	<h1 class="header">Welcome</h1>
+	<slot />
 </div>
 
 <style>
@@ -12,10 +13,6 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		display: flex;
-		flex-direction: column;
-	}
-	.header {
-		align-self: center;
+		background: black;
 	}
 </style>
