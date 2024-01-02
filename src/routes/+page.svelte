@@ -1,9 +1,14 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
+	import Login from '$lib/components/Login.svelte';
+	let supabaseAuth;
 </script>
 
-<div class="container">
-	<h1 class="header">Welcome</h1>
-</div>
+{#if browser}
+	<div class="container">
+		<Login redirectUrl="" bind:supabaseAuth />
+	</div>
+{/if}
 
 <style>
 	.container {
@@ -14,6 +19,8 @@
 		height: 100%;
 		display: flex;
 		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 	.header {
 		align-self: center;
