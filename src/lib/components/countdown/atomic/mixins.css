@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+.number-text {
+	color: #fff;
+	font-family: 'Karla';
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 800;
+	line-height: normal;
+	transition: color 0.1s ease;
+	user-select: none;
+}
+
+.number-text-used {
+	color: #a1a1a1;
+}
+
+.number {
+	display: flex;
+	width: 75px;
+	height: 75px;
+	justify-content: center;
+	align-items: center;
+	gap: 25px;
+	flex-shrink: 0;
+	background: var(--bg);
+	box-shadow: -2px -2px 2px 0px rgba(0, 0, 0, 0.3) inset;
+}
+
+.number-used {
+	box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.3) inset;
+}
+
+.total {
+	display: flex;
+	width: 129px;
+	height: 75px;
+	justify-content: center;
+	align-items: center;
+	gap: 25px;
+	flex-shrink: 0;
+	border-radius: 25px;
+	background: var(--bg);
+	box-shadow: -2px -2px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.total-selected {
+	box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.total-target,
+.total-invalid {
+	box-shadow: unset;
+}
+
+.operator-text {
+	color: #fff;
+	text-align: center;
+	font-size: 30px;
+	font-style: normal;
+	font-weight: 800;
+	line-height: normal;
+	user-select: none;
+}
