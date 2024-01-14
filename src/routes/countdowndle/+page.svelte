@@ -1,38 +1,27 @@
 <script>
-	import Guess from './../../lib/components/countdown/composite/Guess.svelte';
-	import NumberSet from './../../lib/components/countdown/composite/NumberSet.svelte';
-	import Logo from './../../lib/components/countdown/atomic/Logo.svelte';
-	import { numbers, target } from '$lib/stores.js';
-	$numbers = [
-		{ number: 2 },
-		{ number: 5 },
-		{ number: 7 },
-		{ number: 2 },
-		{ number: 25 },
-		{ number: 100 }
-	];
+	import Guess from '$lib/components/countdown/composite/Guess.svelte';
+	import NumberSet from '$lib/components/countdown/composite/NumberSet.svelte';
+	import Logo from '$lib/components/countdown/atomic/Logo.svelte';
+	import { numbers, target, guesses } from '$lib/countdown/stores.js';
+	import { generateNumberSet } from '$lib/countdown/utils';
+	$numbers = generateNumberSet([2, 5, 7, 2, 25, 100]);
 	$target = 305;
-
-	let guesses = [];
-
-	function makeGuess(num_one, num_two, operator) {
-		switch (operator) {
-			case '+':
-				return num_one + num_two;
-			case '-':
-				return num_one - num_two;
-			case 'x':
-				return num_one * num_two;
-			case '/':
-				return num_one / num_two;
+	let guessContainer;
+	let guessIds = [];
+	$: newestGuess = $guesses.at(-1);
+	$: if (newestGuess && !newestGuess.invalid && !guessIds.includes(newestGuess.id)) {
+		guessIds.push(newestGuess.id);
+		if (newestGuess.number == $target) {
+		} else {
+			const element = new Guess({ target: document.getElementsByClassName('guess-container')[0] });
 		}
-	}
+	} else newestGuess = undefined;
 </script>
 
 <div class="container">
 	<Logo />
 	<NumberSet />
-	<div class="guess-container">
+	<div class="guess-container" bind:this={guessContainer}>
 		<Guess />
 	</div>
 </div>

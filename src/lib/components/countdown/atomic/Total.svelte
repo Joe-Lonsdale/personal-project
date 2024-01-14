@@ -3,6 +3,7 @@
 	export let used = false;
 	export let target = false;
 	export let invalid = false;
+	let id = undefined;
 	let bgColor = '#BA8D52';
 	$: if (!target && !invalid) {
 		if (used) bgColor = '#7E5116';

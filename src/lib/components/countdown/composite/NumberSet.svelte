@@ -1,12 +1,12 @@
 <script>
 	import Number from './../atomic/Number.svelte';
 	import Total from './../atomic/Total.svelte';
-	import { numbers, target } from '$lib/stores.js';
+	import { numbers, target } from '$lib/countdown/stores.js';
 </script>
 
 <div class="container">
 	{#each $numbers as number}
-		<Number label={number.number} used={number.used} />
+		<Number label={number.number} used={number.used} isNumberSet={true} id={number.id} />
 	{/each}
 	<Total label={$target} target={true} />
 </div>
