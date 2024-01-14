@@ -13,6 +13,6 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: black;
+		background: #2f2f2f;
 	}
 </style>

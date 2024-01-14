@@ -10,6 +10,7 @@
 		if (used) bgColor = '#004667';
 		else bgColor = '#3982A3';
 	}
+	let select = false;
 </script>
 
 <div

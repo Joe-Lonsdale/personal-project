@@ -6,6 +6,10 @@
 	export let number_two = { number: undefined, composite: false, used: false };
 	export let operator = '';
 	export let total = { number: undefined, target: false, invalid: false, used: false };
+
+	export function setNumberOne(num) {
+		number_one.number = num;
+	}
 </script>
 
 <div class="container">
