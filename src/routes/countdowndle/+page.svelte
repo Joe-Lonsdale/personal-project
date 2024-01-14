@@ -2,12 +2,16 @@
 	import Guess from './../../lib/components/countdown/composite/Guess.svelte';
 	import NumberSet from './../../lib/components/countdown/composite/NumberSet.svelte';
 	import Logo from './../../lib/components/countdown/atomic/Logo.svelte';
-
-	let numberSet = [2, 5, 7, 2, 25, 100];
-	let target = 305;
-	numberSet = numberSet.map((x) => {
-		return { number: x, used: false };
-	});
+	import { numbers, target } from '$lib/stores.js';
+	$numbers = [
+		{ number: 2 },
+		{ number: 5 },
+		{ number: 7 },
+		{ number: 2 },
+		{ number: 25 },
+		{ number: 100 }
+	];
+	$target = 305;
 
 	let guesses = [];
 
@@ -27,7 +31,7 @@
 
 <div class="container">
 	<Logo />
-	<NumberSet numbers={numberSet} {target} />
+	<NumberSet />
 	<div class="guess-container">
 		<Guess />
 	</div>

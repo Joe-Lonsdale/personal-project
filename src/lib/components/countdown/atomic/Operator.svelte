@@ -1,6 +1,6 @@
 <script>
 	import { slide } from 'svelte/transition';
-	export let label = undefined;
+	export let label = '';
 	let bgColor = '#75BEDF';
 	let selectOperator = false;
 
@@ -8,7 +8,7 @@
 		selectOperator = !selectOperator;
 	}
 
-	$: operators = label ? [label] : ['+', '-', 'x', '/'];
+	$: operators = label != undefined ? [label] : ['+', '-', 'x', '/'];
 </script>
 
 <div class="operator-container">
@@ -18,7 +18,7 @@
 			style:--bg={bgColor}
 			on:click={() => {
 				toggleState();
-				if (label) label = undefined;
+				if (label || label == '') label = undefined;
 				else label = operator;
 			}}
 			in:slide

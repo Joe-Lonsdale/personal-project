@@ -1,19 +1,14 @@
 <script>
 	import Number from './../atomic/Number.svelte';
 	import Total from './../atomic/Total.svelte';
-	export let numbers = [];
-	export let target;
-
-	export function addNumber(num) {
-		numbers = [...numbers, { number: num, used: false }];
-	}
+	import { numbers, target } from '$lib/stores.js';
 </script>
 
 <div class="container">
-	{#each numbers as number}
+	{#each $numbers as number}
 		<Number label={number.number} used={number.used} />
 	{/each}
-	<Total label={target} target={true} />
+	<Total label={$target} target={true} />
 </div>
 
 <style>
