@@ -23,8 +23,9 @@
 		number_two.number &&
 		operator &&
 		operator != '' &&
-		total != prevTotal
+		+makeGuess(number_one.number, number_two.number, operator).toFixed(2) != prevTotal
 	) {
+		console.log(total);
 		total.number = +makeGuess(number_one.number, number_two.number, operator).toFixed(2);
 		if (total.number < 0 || total.number % 1 != 0) {
 			total.invalid = true;
