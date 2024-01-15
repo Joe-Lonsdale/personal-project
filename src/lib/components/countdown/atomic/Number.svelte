@@ -16,18 +16,23 @@
 		else bgColor = '#3982A3';
 	}
 	let selectNumber = false;
-	let numberSet = [{ number: label, id, used, composite }];
 
-	$: if (id && !selectNumber) {
-		numberSet = [...$guesses, ...$numbers].filter((x) => x.id == id);
-		label = numberSet[0].number;
-		id = numberSet[0].id;
-		composite = numberSet[0].composite;
-		used = false;
+	let numberSet = [];
+	$: if ($guesses && $numbers) {
+		if (!selectNumber) {
+			if (id) {
+				numberSet = [...$numbers, ...$guesses].filter((x) => x.id == id);
+				label = numberSet[0].number;
+			} else {
+				numberSet = [{ number: label, id, used, composite }];
+			}
+		} else updateNumberSet();
+	}
+	function updateNumberSet() {
+		numberSet = [...$numbers.filter((x) => !x.used), ...$guesses.filter((x) => !x.used)];
 	}
 	function toggleState(id) {
 		if (selectNumber) {
-			numberSet = numberSet.filter((v, i, a) => v.id == id);
 			$numbers = $numbers.map((x) => {
 				if (x.id == id && !x.used) x.used = true;
 				else if (x.id == prevIdSelected) x.used = false;
@@ -38,9 +43,8 @@
 				else if (x.id == prevIdSelected) x.used = false;
 				return x;
 			});
-		} else {
-			numberSet = [...$numbers.filter((x) => !x.used), ...$guesses.filter((x) => !x.used)];
 		}
+		updateNumberSet();
 		selectNumber = !selectNumber;
 	}
 

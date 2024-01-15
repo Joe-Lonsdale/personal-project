@@ -20,6 +20,8 @@
 		numberTwo
 	};
 	$: if (
+		numberOne &&
+		numberTwo &&
 		operator &&
 		numberOne.number &&
 		numberTwo.number &&
@@ -30,6 +32,8 @@
 
 	function updateTotal() {
 		total.number = +makeGuess(numberOne.number, numberTwo.number, operator).toFixed(2);
+		prevTotal = total;
+
 		if (total.number < 0 || total.number % 1 != 0) {
 			total.invalid = true;
 		} else total.invalid = false;
@@ -42,10 +46,10 @@
 		} else {
 			$guesses = [...$guesses, total];
 		}
-		prevTotal = total;
 	}
 
 	function makeGuess(num_one, num_two, operator) {
+		console.log(num_one, num_two, operator);
 		switch (operator) {
 			case '+':
 				return num_one + num_two;
