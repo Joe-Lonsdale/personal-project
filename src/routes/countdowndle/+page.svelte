@@ -1,4 +1,5 @@
 <script>
+	import { browser } from '$app/environment';
 	import Guess from '$lib/components/countdown/composite/Guess.svelte';
 	import NumberSet from '$lib/components/countdown/composite/NumberSet.svelte';
 	import Logo from '$lib/components/countdown/atomic/Logo.svelte';
@@ -9,22 +10,30 @@
 	let guessContainer;
 	let guessIds = [];
 	$: newestGuess = $guesses.at(-1);
-	$: if (newestGuess && !newestGuess.invalid && !guessIds.includes(newestGuess.id)) {
-		guessIds.push(newestGuess.id);
-		if (newestGuess.number == $target) {
-		} else {
-			const element = new Guess({ target: document.getElementsByClassName('guess-container')[0] });
+	$: if (newestGuess && !newestGuess.invalid) {
+		if (!guessIds.includes(newestGuess.id)) {
+			guessIds.push(newestGuess.id);
+			if (newestGuess.number == $target) {
+			} else {
+				const element = new Guess({
+					target: document.getElementsByClassName('guess-container')[0]
+				});
+			}
 		}
 	} else newestGuess = undefined;
+
+	$: console.log($guesses);
 </script>
 
-<div class="container">
-	<Logo />
-	<NumberSet />
-	<div class="guess-container" bind:this={guessContainer}>
-		<Guess />
+{#if browser}
+	<div class="container">
+		<Logo />
+		<NumberSet />
+		<div class="guess-container" bind:this={guessContainer}>
+			<Guess />
+		</div>
 	</div>
-</div>
+{/if}
 
 <style>
 	.container {

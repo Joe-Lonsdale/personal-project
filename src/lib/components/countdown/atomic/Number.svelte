@@ -16,19 +16,26 @@
 		else bgColor = '#3982A3';
 	}
 	let selectNumber = false;
-	let numberSet = [{ number: label, id: undefined, used: false, composite: false }];
+	let numberSet = [{ number: label, id, used, composite }];
 
+	$: if (id && !selectNumber) {
+		numberSet = [...$guesses, ...$numbers].filter((x) => x.id == id);
+		label = numberSet[0].number;
+		id = numberSet[0].id;
+		composite = numberSet[0].composite;
+		used = false;
+	}
 	function toggleState(id) {
 		if (selectNumber) {
 			numberSet = numberSet.filter((v, i, a) => v.id == id);
 			$numbers = $numbers.map((x) => {
 				if (x.id == id && !x.used) x.used = true;
-				if (x.id == prevIdSelected) x.used = false;
+				else if (x.id == prevIdSelected) x.used = false;
 				return x;
 			});
 			$guesses = $guesses.map((x) => {
 				if (x.id == id && !x.used) x.used = true;
-				if (x.id == prevIdSelected) x.used = false;
+				else if (x.id == prevIdSelected) x.used = false;
 				return x;
 			});
 		} else {
@@ -52,10 +59,15 @@
 			<div
 				class="{!selectNumber ? 'rounded-number' : 'squared-number'} number"
 				style:--bg={getBGColor(number)}
-				style:z-index={selectNumber ? 2 : 1}
+				style:z-index={selectNumber ? 5 : 1}
 				on:click={() => {
 					if (label || label == '') label = undefined;
-					else label = number.number;
+					else {
+						label = number.number;
+						id = number.id;
+						composite = number.composite;
+						used = number.used;
+					}
 					toggleState(number.id);
 					prevIdSelected = number.id;
 				}}
