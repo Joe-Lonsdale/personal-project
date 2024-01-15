@@ -16,6 +16,7 @@
 		<div
 			class="squared-operator number"
 			style:--bg={bgColor}
+			style:z-index={selectOperator ? 2 : 1}
 			on:click={() => {
 				toggleState();
 				if (label || label == '') label = undefined;

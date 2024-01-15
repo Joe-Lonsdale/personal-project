@@ -23,33 +23,41 @@
 		numberTwo,
 		stage
 	};
+
+	$: console.log(numberOne ? true : false);
 	$: if (
 		numberOne &&
 		numberTwo &&
 		operator &&
-		numberOne.number &&
-		numberTwo.number &&
-		+makeGuess(numberOne.number, numberTwo.number, operator).toFixed(2) != prevTotal.number
+		numberOne.number !== undefined &&
+		numberOne.number !== '' &&
+		numberTwo.number !== undefined &&
+		numberTwo.number !== ''
 	) {
-		updateTotal();
+		let newTotal = +makeGuess(numberOne.number, numberTwo.number, operator);
+		console.log(numberOne, operator, numberTwo, total, prevTotal);
+		if (newTotal.toFixed(2) != prevTotal.number || newTotal.toFixed(2) == 0) updateTotal();
 	}
 
 	function updateTotal() {
-		total.number = +makeGuess(numberOne.number, numberTwo.number, operator).toFixed(2);
-		prevTotal = total;
+		let new_total = {};
+		Object.assign(new_total, total);
+		new_total.number = +makeGuess(numberOne.number, numberTwo.number, operator).toFixed(2);
+		prevTotal = new_total;
 
-		if (total.number < 0 || total.number % 1 != 0) {
-			total.invalid = true;
-		} else total.invalid = false;
-		if (total.number == $target) total.target = true;
+		if (new_total.number < 0 || new_total.number % 1 != 0) {
+			new_total.invalid = true;
+		} else new_total.invalid = false;
+		if (new_total.number == $target) new_total.target = true;
 		if ($guesses.filter((x) => x.id == id).length != 0) {
 			$guesses = $guesses.map((x) => {
-				if (x.id == id) return total;
+				if (x.id == id) return new_total;
 				else return x;
 			});
 		} else {
-			$guesses = [...$guesses, total];
+			$guesses = [...$guesses, new_total];
 		}
+		Object.assign(total, new_total);
 	}
 
 	function makeGuess(num_one, num_two, operator) {

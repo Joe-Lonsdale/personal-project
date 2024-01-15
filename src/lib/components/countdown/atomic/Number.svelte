@@ -31,15 +31,13 @@
 	function updateNumberSet() {
 		if (!isNumberSet) {
 			let currentGuess = $guesses.filter((x) => {
-				return x.numberOne.id != id || x.numberTwo.id != id;
+				return x.numberOne.id == id || x.numberTwo.id == id;
 			})[0];
 			numberSet = [
 				...$numbers.filter((x) => !x.used),
 				...$guesses
 					.filter((x) => !x.used)
-					.filter((x) => {
-						x.stage > currentGuess.stage;
-					})
+					.filter((x) => currentGuess == undefined || x.stage > currentGuess.stage)
 			];
 		} else numberSet = [...$numbers.filter((x) => !x.used), ...$guesses.filter((x) => !x.used)];
 	}
@@ -75,7 +73,7 @@
 			<div
 				class="{!selectNumber ? 'rounded-number' : 'squared-number'} number"
 				style:--bg={getBGColor(number)}
-				style:z-index={selectNumber ? 5 : 1}
+				style:z-index={selectNumber ? 2 : 1}
 				on:click={() => {
 					if (label || label == '') label = undefined;
 					else {
