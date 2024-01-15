@@ -29,7 +29,19 @@
 		} else updateNumberSet();
 	}
 	function updateNumberSet() {
-		numberSet = [...$numbers.filter((x) => !x.used), ...$guesses.filter((x) => !x.used)];
+		if (!isNumberSet) {
+			let currentGuess = $guesses.filter((x) => {
+				return x.numberOne.id != id || x.numberTwo.id != id;
+			})[0];
+			numberSet = [
+				...$numbers.filter((x) => !x.used),
+				...$guesses
+					.filter((x) => !x.used)
+					.filter((x) => {
+						x.stage > currentGuess.stage;
+					})
+			];
+		} else numberSet = [...$numbers.filter((x) => !x.used), ...$guesses.filter((x) => !x.used)];
 	}
 	function toggleState(id) {
 		if (selectNumber) {

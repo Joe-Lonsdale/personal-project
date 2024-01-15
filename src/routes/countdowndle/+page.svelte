@@ -18,6 +18,7 @@
 				const element = new Guess({
 					target: document.getElementsByClassName('guess-container')[0]
 				});
+				element.stage = guessIds.length;
 			}
 		}
 	} else newestGuess = undefined;
@@ -30,7 +31,7 @@
 		<Logo />
 		<NumberSet />
 		<div class="guess-container" bind:this={guessContainer}>
-			<Guess />
+			<Guess stage={0} />
 		</div>
 	</div>
 {/if}

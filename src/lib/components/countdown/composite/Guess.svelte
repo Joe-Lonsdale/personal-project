@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script>
 	import { guesses, target } from '$lib/countdown/stores.js';
 	import { getUUID } from '$lib/countdown/utils.js';
@@ -7,6 +9,7 @@
 	export let numberOne = { number: undefined, composite: false, used: false, id: undefined };
 	export let numberTwo = { number: undefined, composite: false, used: false, id: undefined };
 	export let operator = '';
+	export let stage;
 	let prevTotal = { number: undefined };
 	let id = getUUID();
 	export let total = {
@@ -17,7 +20,8 @@
 		composite: true,
 		id,
 		numberOne,
-		numberTwo
+		numberTwo,
+		stage
 	};
 	$: if (
 		numberOne &&
@@ -49,7 +53,6 @@
 	}
 
 	function makeGuess(num_one, num_two, operator) {
-		console.log(num_one, num_two, operator);
 		switch (operator) {
 			case '+':
 				return num_one + num_two;
