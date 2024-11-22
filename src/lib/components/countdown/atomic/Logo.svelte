@@ -5,9 +5,6 @@
 
 <style>
 	.logo {
-		position: absolute;
-		left: 50%;
-		top: 10%;
 		color: #3982a3;
 		font-family: Karla;
 		font-size: 64px;
