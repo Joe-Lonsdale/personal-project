@@ -73,6 +73,10 @@
 		}
 		return 0;
 	}
+
+	function deleteGuess() {
+		$guesses = $guesses.map((v,i,a) => {return v.id != id});
+	}
 </script>
 
 <div class="container">
@@ -98,6 +102,7 @@
 			bind:invalid={total.invalid}
 			bind:used={total.used}
 		/>
+		<button on:click={deleteGuess} class="delete_guess">x</button>
 	{/key}
 </div>
 
