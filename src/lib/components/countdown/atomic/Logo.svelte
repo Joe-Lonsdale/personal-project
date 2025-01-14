@@ -11,7 +11,7 @@
 		font-style: normal;
 		font-weight: 700;
 		line-height: normal;
-		transform: translate(-50%, -50%);
 		text-shadow: 0px 5px 12px rgba(0, 0, 0, 0.5);
+		margin: 12px 0px;
 	}
 </style>
